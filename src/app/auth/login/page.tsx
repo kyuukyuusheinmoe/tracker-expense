@@ -12,6 +12,7 @@ const Login = () => {
   const { handleSubmit, control } = methods;
 
   const action: () => void = handleSubmit(async (data) => {
+    console.log ('xxx logging in')
     await login(data);
   });
 
@@ -23,7 +24,7 @@ const Login = () => {
         {components?.map((component, index) => (
           <DynamicFormElement
             key={index}
-            componentType={component.formProps.type}
+            componentType={component.formprops.type}
             {...component}
             control={control}
           />

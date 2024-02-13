@@ -12,7 +12,7 @@ export const login = async (data: any) => {
           })
 
         if (result.status === 200) {
-            cookies().set(USER, result.data.data)
+            cookies().set(USER, JSON.stringify(result.data.data))
             redirect('/')
         }
         return {success: false, message: "Something went wrong"}

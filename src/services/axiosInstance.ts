@@ -1,4 +1,8 @@
+import { USER } from "@/constants/common";
 import axios from "axios";
+import { cookies } from "next/headers";
+
+const isServer = typeof window === 'undefined'
 
 export const axiosClient = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API,
@@ -8,7 +12,28 @@ export const axiosClient = axios.create({
     }
 });
 
-axiosClient.interceptors.request.use ((request) => request)
+axiosClient.interceptors.request.use ((request) => { 
+    if (isServer) {
+      const userDatString = cookies().get(USER)?.value
+      console.log ('xxx userData String ', userDatString)
+
+      const userData = userDatString ? JSON.parse(userDatString) : {}
+
+      console.log ('xxx userData ', userData)
+
+      if (userData?.token) {
+          request.headers['Authorization'] = `Bearer ${userData.token.replace(/['"]+/g, '')}`
+      }
+  }
+  else {
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, '$1')
+
+    if (token) {
+        request.headers['Authorization'] = `Bearer ${token.replaceAll("%22", '')}`
+    }
+  }
+  return request
+})
 
 axiosClient.interceptors.response.use (response => {
   return response
