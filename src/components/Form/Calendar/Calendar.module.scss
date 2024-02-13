@@ -1,0 +1,7 @@
+.calendar-component {
+    :global {
+        .p-calendar > input{
+            @apply w-full bg-transparent border-b-[1px] border-x-0 border-t-0 border-black rounded-none #{!important}
+        }
+    }
+}
