@@ -15,11 +15,8 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.request.use ((request) => { 
     if (isServer) {
       const userDatString = cookies().get(USER)?.value
-      console.log ('xxx userData String ', userDatString)
 
       const userData = userDatString ? JSON.parse(userDatString) : {}
-
-      console.log ('xxx userData ', userData)
 
       if (userData?.token) {
           request.headers['Authorization'] = `Bearer ${userData.token.replace(/['"]+/g, '')}`

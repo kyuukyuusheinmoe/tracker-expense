@@ -18,3 +18,4 @@ export const transactionColorMapper = {
 }
 
 export const USER = "USER"
+

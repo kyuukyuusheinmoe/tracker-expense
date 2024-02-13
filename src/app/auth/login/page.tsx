@@ -12,7 +12,6 @@ const Login = () => {
   const { handleSubmit, control } = methods;
 
   const action: () => void = handleSubmit(async (data) => {
-    console.log ('xxx logging in')
     await login(data);
   });
 

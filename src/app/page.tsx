@@ -6,6 +6,8 @@ import {
 import { months, currency } from "@/constants/common";
 import { Button } from "primereact/button";
 import BarChart from "@/components/Charts/BarChart";
+import { Suspense } from "react";
+import TransactionList from "@/container/dashboard/TransactionList";
 
 export default async function Home() {
   const categoriesData = await fetchTopCategories();
@@ -62,7 +64,9 @@ export default async function Home() {
       </p>
       <BarChart chartData={formatChartData} />
 
-      <TransactionList />
+      <Suspense fallback={"Loading"}>
+        <TransactionList />
+      </Suspense>
     </div>
   );
 }

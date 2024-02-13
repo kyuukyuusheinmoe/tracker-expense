@@ -34,3 +34,13 @@ export const fetchTotalExpense = async () => {
         return null
     }
 }
+
+export const fetchTransactionList = async (url: string) => {
+   try {
+    const result = await fetcher(url)
+
+    return result.data?.data
+   } catch (error) {
+    return []
+   }
+}
