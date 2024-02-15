@@ -3,6 +3,7 @@ import { fetcher, axiosClient } from "./axiosInstance"
 import moment from "moment"
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { isRedirectError } from "next/dist/client/components/redirect"
 
 export const fetchTopCategories = async () => {
 
@@ -48,15 +49,24 @@ export const fetchTransactionList = async (url: string) => {
 }
 
 export const createTransction = async (data: any) => {
+    console.log ('xxx createTransction ', data)
     try {
         const result = await axiosClient.post('/transaction/create', {
             ...data
         })
+        console.log ('xxx result ', result)
+
         if (result.status === 201) {
             revalidatePath('/')
+            return ({success: false, message: "Transaction has been created."})
+        }
+        return ({success: false, message: "Failed to create transaction"})
+
+    } catch (error) {
+        console.log ('xxx error ', error)
+        if (isRedirectError(error)) {
             redirect('/')
         }
-    } catch (error) {
-        return ({success: true, message: "Failed to create transaction"})
+        return ({success: false, message: "Failed to create transaction"})
     }
   }

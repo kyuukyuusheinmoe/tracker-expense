@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import { useForm, FormProvider } from "react-hook-form";
 import { Dialog } from "primereact/dialog";
@@ -24,11 +25,13 @@ const Page = () => {
     undefined
   );
   const { control, handleSubmit, reset } = methods;
+  const router = useRouter();
 
   const onSubmit: () => void = handleSubmit(async (data: any) => {
     const requestData = { ...data };
     const res = await createTransction(requestData);
     setApiData(res);
+    setConfirmVisible(true);
   });
 
   return (
@@ -61,7 +64,13 @@ const Page = () => {
         header={apiData?.success === false ? "Failed!" : "Success!"}
         visible={confirmVisible}
         onHide={() => setConfirmVisible(false)}>
-        {apiData?.success === false && (
+        {apiData?.success ? (
+          <Button
+            label="Go Home"
+            onClick={() => router.push("/")}
+            className="!text-black"
+          />
+        ) : (
           <div className="flex flex-col gap-4">
             <p> Something went wrong.</p>
             <Button
