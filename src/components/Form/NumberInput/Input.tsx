@@ -1,10 +1,19 @@
 import React from "react";
 import { InputNumber } from "primereact/inputnumber";
-import { useFormContext } from "react-hook-form";
 
-function InputNumberComponent({ label, name, value, onChange }) {
-  const { register } = useFormContext();
+type InputNumberComponentProps = {
+  label: string;
+  name: string;
+  value: number;
+  onChange: (value: number | null | undefined) => void;
+};
 
+function InputNumberComponent({
+  label,
+  name,
+  value,
+  onChange,
+}: InputNumberComponentProps) {
   return (
     <div className="grid grid-cols-12 items-center rounded-full px-4">
       <label className="col-span-4 text-center text-md font-bold">
