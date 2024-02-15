@@ -24,3 +24,24 @@ export const login = async (data: any) => {
         return {success: false, message:error?.response?.data?.message ||  "Something went wrong"}
     }
 }
+
+export async function logout()
+{
+    const redirectUrl = '/auth/login';
+    try
+    {
+        cookies().delete("user");
+        cookies().delete("token");
+
+        return redirect(redirectUrl);
+
+    } catch (e)
+    {
+        if (isRedirectError(e))
+        {
+            return redirect(redirectUrl);
+        }
+        console.log(e);
+        return { message: 'Failed to logout' };
+    }
+}

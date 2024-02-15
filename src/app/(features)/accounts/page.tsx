@@ -4,10 +4,11 @@ import { fetchAccountList } from "@/services/accountServices";
 import { AccountCardProps } from "@/components/Cards/AccountCard";
 
 const Page = async () => {
-  const { data: accounts } = await fetchAccountList("/accounts");
+  const list = await fetchAccountList("/account/list");
+  console.log("xxx accounts ", list);
   return (
     <div className="grid gap-2 p-4">
-      {accounts?.map((account: AccountCardProps) => (
+      {list?.data?.map((account: AccountCardProps) => (
         <AccountCard key={account.id} {...account} />
       ))}
     </div>

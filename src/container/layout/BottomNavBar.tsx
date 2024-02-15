@@ -21,8 +21,11 @@ function BottomNavBar() {
         </div>
       </div>
       <div className="border shadow-md flex justify-between p-6 bg-white">
-        <i className="pi pi-home !text-2xl" />
-        <i className="pi pi-wallet !text-2xl" />
+        <i className="pi pi-home !text-2xl" onClick={() => router.push("/")} />
+        <i
+          className="pi pi-wallet !text-2xl"
+          onClick={() => router.push("/accounts")}
+        />
       </div>
     </div>
   );

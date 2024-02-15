@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "primereact/button";
-import { IconColorMapper } from "../../../../exp-tracker/src/utils/common";
+import { IconColorMapper } from "@/utils/common";
 import clsx from "clsx";
 
 export type AccountCardProps = {
