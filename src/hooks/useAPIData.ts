@@ -9,7 +9,9 @@ const useAPIData = (dataSource: any, watchValue: any) => {
             try {
                 if (dataSource && dataSource.type === "API" && dataSource.url) {
                     const apiData = await axios.get(dataSource.url);
-                    setData(apiData);
+                    if (apiData.status === 200) {
+                        setData(apiData.data.data);
+                    }
                 } else if (dataSource && dataSource.items) {
                     if (dataSource.filterCondition) {
                         const {filterValue} = dataSource.filterCondition;

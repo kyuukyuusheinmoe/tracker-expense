@@ -42,11 +42,6 @@ function DynamicFormElement({
       const isVisible =
         watchValues[dependencyFieldName] === hasValue ? show : true;
       setComponentShow((prev) => {
-        // if (!prev) {
-        //   control.unregister(name, {
-        //     keepIsValid: true,
-        //   })
-        // }
         return isVisible;
       });
     }

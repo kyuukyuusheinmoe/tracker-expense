@@ -4,6 +4,7 @@ import "./globals.css";
 import MainLayout from "@/container/layout/MainLayout";
 import BottomNavBar from "@/container/layout/BottomNavBar";
 import "primeicons/primeicons.css";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

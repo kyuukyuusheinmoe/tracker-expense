@@ -1,6 +1,8 @@
 'use server'
-import { fetcher } from "./axiosInstance"
+import { fetcher, axiosClient } from "./axiosInstance"
 import moment from "moment"
+import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 export const fetchTopCategories = async () => {
 
@@ -44,3 +46,17 @@ export const fetchTransactionList = async (url: string) => {
     return []
    }
 }
+
+export const createTransction = async (data: any) => {
+    try {
+        const result = await axiosClient.post('/transaction/create', {
+            ...data
+        })
+        if (result.status === 201) {
+            revalidatePath('/')
+            redirect('/')
+        }
+    } catch (error) {
+        return ({success: true, message: "Failed to create transaction"})
+    }
+  }
