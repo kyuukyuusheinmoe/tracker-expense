@@ -6,11 +6,10 @@ import { revalidatePath } from "next/cache"
 import { isRedirectError } from "next/dist/client/components/redirect"
 
 export const fetchTopCategories = async () => {
-
     try {
         const result = await fetcher('/analytic/top-categories?limit=5')
 
-        return result.data?.data
+        return result?.data
 
     } catch (error: any) {
         console.log ('xxx error ', error)
