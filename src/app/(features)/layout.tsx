@@ -5,5 +5,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <PageLayout>{children}</PageLayout>;
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head></head>
+      <body>
+        <PageLayout>{children}</PageLayout>
+      </body>
+    </html>
+  );
 }

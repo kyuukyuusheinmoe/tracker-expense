@@ -4,7 +4,7 @@ import { fetchTransactionList } from "@/services/transactionServices";
 
 const TransactionList = async () => {
   const transactions = await fetchTransactionList(
-    `/transactions/list?page=${0}&size=${5}`
+    `/transaction/list?page=${0}&pageSize=${5}`
   );
 
   return (

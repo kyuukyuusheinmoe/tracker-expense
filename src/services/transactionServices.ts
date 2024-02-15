@@ -41,19 +41,19 @@ export const fetchTransactionList = async (url: string) => {
    try {
     const result = await fetcher(url)
 
-    return result.data?.data
+    console.log ('xxx result.data',url, result)
+    return result?.data
    } catch (error) {
+    console.log ('xxx error ', error)
     return []
    }
 }
 
 export const createTransction = async (data: any) => {
-    console.log ('xxx createTransction ', data)
     try {
         const result = await axiosClient.post('/transaction/create', {
             ...data
         })
-        console.log ('xxx result ', result)
 
         if (result.status === 201) {
             revalidatePath('/')
@@ -62,7 +62,6 @@ export const createTransction = async (data: any) => {
         return ({success: false, message: "Failed to create transaction"})
 
     } catch (error) {
-        console.log ('xxx error ', error)
         if (isRedirectError(error)) {
             redirect('/')
         }

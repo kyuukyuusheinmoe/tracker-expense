@@ -5,7 +5,7 @@ import { IconColorMapper } from '../../../../exp-tracker/src/utils/common'
 import { currency } from '../../../../exp-tracker/src/constants/common'
 import moment from 'moment'
 
-function TransactionCard({item}) {
+function TransactionCard({item}: {item: any}) {
   return (
         <div className={clsx(IconColorMapper(item.type)?.color, 'py-2 px-2 text-center items-center rounded-lg text-sm')}>
             <div className='flex justify-between items-center'>

@@ -5,9 +5,9 @@ import {
 } from "@/services/transactionServices";
 import { months, currency } from "@/constants/common";
 import { Button } from "primereact/button";
-import BarChart from "@/components/Charts/BarChart";
 import { Suspense } from "react";
-import TransactionList from "@/container/dashboard/TransactionList";
+import {TransactionList, TopCategoriesChart} from "./ui/dashboard";
+import { Skeleton } from 'primereact/skeleton';
 
 export default async function Home() {
   const categoriesData = await fetchTopCategories();
@@ -17,28 +17,6 @@ export default async function Home() {
   const currentDate = new Date();
   const currentMonth = months[currentDate.getMonth()];
 
-  const formatChartData = {
-    labels: categoriesData?.map((cat: any) => cat.categoryName),
-    datasets: [
-      {
-        label: "Amount",
-        data: categoriesData?.map((cat: any) => cat.amount),
-        backgroundColor: [
-          "rgba(255, 159, 64, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-        ],
-        borderColor: [
-          "rgb(255, 159, 64)",
-          "rgb(75, 192, 192)",
-          "rgb(54, 162, 235)",
-          "rgb(153, 102, 255)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
   return (
     <div className="p-4">
       <div className="flex flex-row-reverse">
@@ -62,7 +40,16 @@ export default async function Home() {
         {totalExpense &&
           `${Intl.NumberFormat().format(totalExpense)} ${currency}`}
       </p>
-      <BarChart chartData={formatChartData} />
+      <Suspense
+        fallback={
+          <>
+            <Skeleton size="5rem" className="mr-2"></Skeleton>
+            <Skeleton size="4rem" className="mr-2"></Skeleton>
+            <Skeleton size="4rem" className="mr-2"></Skeleton>
+          </>
+        }>
+        <TopCategoriesChart data={categoriesData} />
+      </Suspense>
 
       <Suspense fallback={"Loading"}>
         <TransactionList />
