@@ -6,17 +6,16 @@ import { SyntheticEvent } from "react";
 export type BaseFormProps = {
     label: string;
     name: string;
+    value: any;
     placeholder?: string;
     defaultValue?: string
 }
 
 export type InputComponentProps = BaseFormProps & {
-    value: string | undefined;
     onChange: (value: string | undefined) => void;
 };
 
 export type InputNumberComponentProps = BaseFormProps & {
-    value: number;
     onChange: (value: number | null | undefined) => void;
 };
 
@@ -27,11 +26,9 @@ export type ItemProps = {
   
 export type DropDownProps = BaseFormProps & {
     items: ItemProps[];
-    value: ItemProps;
     onChange: (item: ItemProps) => void;
-    displayKey: string;
-    defaultValue: ItemProps;
-    displayValue: string;
+    displayKey?: string;
+    displayValue?: string;
 };
 
 export type PasswordComponentProps = BaseFormProps & { value: string, onChange: (value: string)=> void }
@@ -42,6 +39,20 @@ export type RadioListProps = BaseFormProps & {
     value: ItemProps
     onChange: (value: ItemProps) => void;
     items: ItemProps[];
-    displayKey: string;
-    displayValue: string;
+    displayKey?: string;
+    displayValue?: string;
+};
+
+export type FormFieldType = "DropDown" | "Number" | "Password" | "RadioSelect" | "Calendar" | 'Input'
+
+export type DynamicFormElementProps = {
+    control: any;
+    componentType: FormFieldType;
+    label: string;
+    dataSource?: any;
+    name: string;
+    defaultValue?: any;
+    displayKey?: string;
+    displayValue?: string;
+    condition?: any;
   };

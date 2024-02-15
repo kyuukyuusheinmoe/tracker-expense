@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import { CreateAccountForm as components } from "@/constants/Account";
@@ -7,20 +7,19 @@ import { Dialog } from "primereact/dialog";
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicFormElement from "@/components/Form/DynamicFormElement";
 import { createAccount } from "@/services/accountServices";
+import { Response } from "@/types/response";
 
 const Page = () => {
   const methods = useForm({
     shouldUnregister: true,
   });
   const [confirmVisible, setConfirmVisible] = useState(false);
-  const [apiData, setApiData] = useState<{ success?: boolean } | undefined>(
-    undefined
-  );
+  const [apiData, setApiData] = useState<Response<any> | null>(null);
   const { control, handleSubmit, reset } = methods;
 
   const onSubmit: () => void = handleSubmit(async (data: any) => {
     const requestData = { ...data };
-    const res = await createAccount(requestData);
+    const res: Response<any> = await createAccount(requestData);
     setApiData(res);
   });
 
@@ -32,11 +31,9 @@ const Page = () => {
             {components?.map((field, index) => {
               return (
                 <DynamicFormElement
-                  control={control}
                   key={index}
-                  componentType={field.formProps.type}
                   {...field}
-                  defaultValue={field.defaultValue}
+                  defaultValue={field?.defaultValue}
                 />
               );
             })}

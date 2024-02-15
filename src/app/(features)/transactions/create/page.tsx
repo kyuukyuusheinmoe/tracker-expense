@@ -7,14 +7,14 @@ import { Dialog } from "primereact/dialog";
 import { CreateTransactionForm as components } from "@/constants/Transaction";
 import DynamicFormElement from "@/components/Form/DynamicFormElement";
 import { createTransction } from "@/services/transactionServices";
+import { FormFieldType } from "@/types/form";
 
 const Page = () => {
   const methods = useForm({
     defaultValues: useMemo(() => {
-      let arrToObject = {};
-      components.reduce((_, compo: { name: string; defaultValue: any }) => {
-        arrToObject[compo.name] = compo.defaultValue;
-        return arrToObject;
+      let arrToObject: Record<string, any> = {};
+      components.forEach((obj) => {
+        arrToObject[obj.name] = obj.defaultValue;
       });
       return arrToObject;
     }, []),
@@ -43,10 +43,10 @@ const Page = () => {
               return (
                 <DynamicFormElement
                   control={control}
+                  componentType={field.formProps.type as FormFieldType}
                   key={index}
-                  componentType={field.formProps.type}
                   {...field}
-                  defaultValue={field.defaultValue}
+                  defaultValue={field?.defaultValue}
                 />
               );
             })}

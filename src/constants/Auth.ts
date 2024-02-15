@@ -3,7 +3,7 @@ export const LoginForm = [
         label: "Email",
         placeholder: "Email",
         name: 'email',
-        formprops: {
+        formProps: {
             type: "Input"
         }
     },
@@ -11,7 +11,7 @@ export const LoginForm = [
         label: "Password",
         placeholder: "Password",
         name: 'password',
-        formprops: {
+        formProps: {
             type: "Password"
         }
     },]

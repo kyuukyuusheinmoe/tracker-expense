@@ -15,16 +15,15 @@ function RadioList({
   displayValue,
 }: RadioListProps) {
   const handleOnClick = (item: any) => {
-    onChange(item[displayValue]);
+    displayValue && onChange(item[displayValue]);
   };
-  console.log(name, "xxx radio list options ", items);
   return (
     <div>
       <p className="text-md  text-gray-400 mb-2"> {label} </p>
       <div className="flex gap-4">
         {items.map((item: any, index: number) => (
           <div key={index} className="relative">
-            {value === item[displayValue] && (
+            {displayValue && value === item[displayValue] && (
               <CheckCircleIcon className="w-4 h-4 absolute right-0 z-30 text-success" />
             )}
             <Button
@@ -37,7 +36,9 @@ function RadioList({
               onClick={() => {
                 handleOnClick(item);
               }}>
-              <span className="ml-1 mt-1">{item?.[displayKey]}</span>
+              <span className="ml-1 mt-1">
+                {displayKey && item?.[displayKey]}
+              </span>
             </Button>
           </div>
         ))}

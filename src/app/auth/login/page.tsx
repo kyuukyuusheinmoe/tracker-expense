@@ -5,6 +5,7 @@ import DynamicFormElement from "@/components/Form/DynamicFormElement";
 import { Button } from "primereact/button";
 import { LoginForm as components } from "@/constants/Auth";
 import { login } from "@/services/authServices";
+import { FormFieldType } from "@/types/form";
 
 const Login = () => {
   const methods = useForm();
@@ -23,7 +24,7 @@ const Login = () => {
         {components?.map((component, index) => (
           <DynamicFormElement
             key={index}
-            componentType={component.formprops.type}
+            componentType={component.formProps.type as FormFieldType}
             {...component}
             control={control}
           />
