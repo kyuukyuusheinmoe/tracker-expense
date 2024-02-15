@@ -1,6 +1,6 @@
 import {TRXN_DEBIT,TRXN_CREDIT,PAYMENT_CASH, PAYMENT_BANK, PAYMENT_PAY,CATEGORY_BILLS, NECESSITY_LOW,NECESSITY_MODERATE,NECESSITY_HIGH } from '../constants/common'
 
-export const IconColorMapper = ( payment)=> {
+export const IconColorMapper = (payment: string)=> {
     switch(payment) {
         case TRXN_DEBIT: return {color: '!bg-egray-100'}
         case TRXN_CREDIT: return {color: '!bg-eblue-50'}
@@ -14,4 +14,11 @@ export const IconColorMapper = ( payment)=> {
         default: return {icon: 'pi pi-money-bill', color: '!bg-egold-50 !border-egold-50 !text-black'}
 
     }
+}
+
+export const convertUrlToTitle = (url: string) => {
+
+    const [_,feature, action] = url.split('/')
+
+    return `${feature.slice(0,1).toUpperCase() + feature.slice(1)} ${action.slice(0,1).toUpperCase() + action.slice(1)}`
 }

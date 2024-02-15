@@ -12,7 +12,7 @@ export const login = async (data: any) => {
           })
 
         if (result.status === 200) {
-            cookies().set(USER, result.data.data)
+            cookies().set(USER, JSON.stringify(result.data.data))
             redirect('/')
         }
         return {success: false, message: "Something went wrong"}
@@ -22,5 +22,26 @@ export const login = async (data: any) => {
             redirect('/')
         }
         return {success: false, message:error?.response?.data?.message ||  "Something went wrong"}
+    }
+}
+
+export async function logout()
+{
+    const redirectUrl = '/auth/login';
+    try
+    {
+        cookies().delete("user");
+        cookies().delete("token");
+
+        return redirect(redirectUrl);
+
+    } catch (e)
+    {
+        if (isRedirectError(e))
+        {
+            return redirect(redirectUrl);
+        }
+        console.log(e);
+        return { message: 'Failed to logout' };
     }
 }

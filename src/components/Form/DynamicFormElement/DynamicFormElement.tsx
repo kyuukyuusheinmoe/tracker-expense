@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { componentMapper } from "@/utils/componentMapper";
-import useAPIData from "../../../hooks/useAPIData";
-
-type DynamicFormElementProps = {
-  control: any;
-  valueType: string;
-  componentType: string;
-  label: string;
-  dataSource: any;
-  name: string;
-  defaultValue: any;
-  condition: any;
-};
+import useAPIData from "@/hooks/useAPIData";
+import { DynamicFormElementProps, FormFieldType } from "@/types/form";
 
 function DynamicFormElement({
   control,
-  valueType,
   componentType,
   label,
   dataSource,
@@ -42,17 +31,12 @@ function DynamicFormElement({
       const isVisible =
         watchValues[dependencyFieldName] === hasValue ? show : true;
       setComponentShow((prev) => {
-        // if (!prev) {
-        //   control.unregister(name, {
-        //     keepIsValid: true,
-        //   })
-        // }
         return isVisible;
       });
     }
   }, [condition, watchValues, setComponentShow, control, name]);
 
-  const Component = componentMapper[componentType]?.component;
+  const Component = componentMapper[componentType as FormFieldType]?.component;
 
   const itemList = useAPIData(dataSource, watchValues[condition?.name]);
 
@@ -60,7 +44,6 @@ function DynamicFormElement({
     <>
       {Component && componentShow && (
         <Component
-          type={valueType}
           label={label}
           items={itemList || []}
           {...field}

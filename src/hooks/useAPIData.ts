@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { fetcher } from "@/services/axiosInstance";
 
 const useAPIData = (dataSource: any, watchValue: any) => {
     const [data, setData] = useState()
@@ -8,12 +8,12 @@ const useAPIData = (dataSource: any, watchValue: any) => {
         const fetchData = async () => {
             try {
                 if (dataSource && dataSource.type === "API" && dataSource.url) {
-                    const apiData = await axios.get(dataSource.url);
-                    setData(apiData);
+                    const apiData = await fetcher(dataSource.url);
+                    setData(apiData.data);
                 } else if (dataSource && dataSource.items) {
                     if (dataSource.filterCondition) {
                         const {filterValue} = dataSource.filterCondition;
-                        setData(()=> dataSource.items.filter (data => data[filterValue] === watchValue))
+                        setData(()=> dataSource.items.filter ((data: any) => data[filterValue] === watchValue))
                     } else {
                         setData(dataSource.items);
                     }
