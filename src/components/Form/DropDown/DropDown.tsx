@@ -1,21 +1,6 @@
 import React from "react";
 import { Dropdown } from "primereact/dropdown";
-
-type ItemProps = {
-  label: string;
-  value: string;
-};
-
-type DropDownProps = {
-  label: string;
-  items: ItemProps[];
-  value: ItemProps;
-  onChange: (item: ItemProps) => void;
-  placeholder?: string;
-  displayKey: string;
-  defaultValue: ItemProps;
-  displayValue: string;
-};
+import { DropDownProps } from "@/types/form";
 
 function DropDownComponent({
   label,

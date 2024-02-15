@@ -3,15 +3,7 @@ import { Button } from "primereact/button";
 import { IconColorMapper } from "../../../utils/common";
 import clsx from "clsx";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
-
-type RadioListProps = {
-  label: string;
-  value: any;
-  onChange: (value: any) => void;
-  items: any;
-  displayKey: string;
-  displayValue: string;
-};
+import { RadioListProps } from "@/types/form";
 
 function RadioList({
   label,

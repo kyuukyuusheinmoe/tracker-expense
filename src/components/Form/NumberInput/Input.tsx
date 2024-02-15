@@ -1,12 +1,6 @@
 import React from "react";
 import { InputNumber } from "primereact/inputnumber";
-
-type InputNumberComponentProps = {
-  label: string;
-  name: string;
-  value: number;
-  onChange: (value: number | null | undefined) => void;
-};
+import { InputNumberComponentProps } from "@/types/form";
 
 function InputNumberComponent({
   label,
