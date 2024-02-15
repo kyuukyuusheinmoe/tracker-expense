@@ -8,6 +8,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import DynamicFormElement from "@/components/Form/DynamicFormElement";
 import { createAccount } from "@/services/accountServices";
 import { Response } from "@/types/response";
+import { FormFieldType } from "@/types/form";
 
 const Page = () => {
   const methods = useForm({
@@ -31,9 +32,10 @@ const Page = () => {
             {components?.map((field, index) => {
               return (
                 <DynamicFormElement
+                  control={control}
+                  componentType={field.formProps.type as FormFieldType}
                   key={index}
                   {...field}
-                  defaultValue={field?.defaultValue}
                 />
               );
             })}

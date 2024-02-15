@@ -41,7 +41,6 @@ export const fetchTransactionList = async (url: string) => {
    try {
     const result = await fetcher(url)
 
-    console.log ('xxx result.data',url, result)
     return result?.data
    } catch (error) {
     console.log ('xxx error ', error)

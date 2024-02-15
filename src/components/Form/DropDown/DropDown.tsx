@@ -13,7 +13,6 @@ function DropDownComponent({
   defaultValue,
   displayValue,
 }: DropDownProps) {
-  console.log( name, "xxx options ", items);
   return (
     <div className="grid grid-cols-12 place-items-center">
       <label className="col-span-4 text-center text-md font-bold">

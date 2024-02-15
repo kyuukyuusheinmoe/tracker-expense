@@ -9,12 +9,11 @@ const useAPIData = (dataSource: any, watchValue: any) => {
             try {
                 if (dataSource && dataSource.type === "API" && dataSource.url) {
                     const apiData = await fetcher(dataSource.url);
-                    console.log ('xxx apiData ', apiData)
                     setData(apiData.data);
                 } else if (dataSource && dataSource.items) {
                     if (dataSource.filterCondition) {
                         const {filterValue} = dataSource.filterCondition;
-                        setData(()=> dataSource.items.filter (data => data[filterValue] === watchValue))
+                        setData(()=> dataSource.items.filter ((data: any) => data[filterValue] === watchValue))
                     } else {
                         setData(dataSource.items);
                     }

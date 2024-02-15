@@ -10,7 +10,7 @@ function LayoutWithHeader({
 }) {
   return (
     <div className="max-w-[1024px] mx-auto">
-      <Header title={title} />
+      <Header />
       <div className="mt-20">{children}</div>
     </div>
   );

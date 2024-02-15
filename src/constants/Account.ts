@@ -1,10 +1,8 @@
-import { DynamicFormElementProps } from '@/types/form';
-
 export const BANK = "BANK";
 export const CASH = "CASH";
 export const PAY = "PAY";
 
-export const CreateAccountForm: DynamicFormElementProps[] = [
+export const CreateAccountForm = [
     {
         label: "Account Type",
         name: 'accountType',
