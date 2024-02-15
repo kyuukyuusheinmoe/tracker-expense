@@ -5,7 +5,6 @@ import {USER} from '@/constants/common'
 export function middleware(req: NextRequest, event: NextFetchEvent) {
     const { pathname } = req.nextUrl
 
-    console.log ('xxx after err ',pathname, req.cookies.get(USER))
     const userData = req.cookies.get(USER)
 
     switch (pathname) {

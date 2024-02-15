@@ -8,6 +8,7 @@ import { RadioListProps } from "@/types/form";
 function RadioList({
   label,
   value,
+  name,
   onChange,
   items,
   displayKey,
@@ -16,6 +17,7 @@ function RadioList({
   const handleOnClick = (item: any) => {
     onChange(item[displayValue]);
   };
+  console.log(name, "xxx radio list options ", items);
   return (
     <div>
       <p className="text-md  text-gray-400 mb-2"> {label} </p>

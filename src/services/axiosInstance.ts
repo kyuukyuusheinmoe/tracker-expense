@@ -1,6 +1,5 @@
 import { USER } from "@/constants/common";
 import axios from "axios";
-import { cookies } from "next/headers";
 
 const isServer = typeof window === 'undefined'
 
@@ -12,8 +11,10 @@ export const axiosClient = axios.create({
     }
 });
 
-axiosClient.interceptors.request.use ((request) => { 
+axiosClient.interceptors.request.use (async (request) => { 
     if (isServer) {
+      const { cookies } = (await import('next/headers'))
+
       const userDatString = cookies().get(USER)?.value
 
       const userData = userDatString ? JSON.parse(userDatString) : {}
@@ -23,11 +24,20 @@ axiosClient.interceptors.request.use ((request) => {
       }
   }
   else {
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, '$1')
+    const userDatString = document.cookie.replace(/(?:(?:^|.*;\s*)USER\s*=\s*([^;]*).*$)|^.*$/, '$1')
 
-    if (token) {
-        request.headers['Authorization'] = `Bearer ${token.replaceAll("%22", '')}`
+    const decodedString = decodeURIComponent(decodeURIComponent(userDatString));
+
+    try {
+      const userData = userDatString ? JSON.parse(decodedString) : {}
+
+      if (userData?.token) {
+          request.headers['Authorization'] = `Bearer ${userData.token.replaceAll("%22", '')}`
+      }
+    } catch (error) {
+      console.log ('xxx parse err ', error)
     }
+    
   }
   return request
 })

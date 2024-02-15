@@ -5,9 +5,9 @@ import { AccountCardProps } from "@/components/Cards/AccountCard";
 
 const Page = async () => {
   const list = await fetchAccountList("/account/list");
-  console.log("xxx accounts ", list);
   return (
     <div className="grid gap-2 p-4">
+      <h1 className="text-xl"> Account List </h1>
       {list?.data?.map((account: AccountCardProps) => (
         <AccountCard key={account.id} {...account} />
       ))}

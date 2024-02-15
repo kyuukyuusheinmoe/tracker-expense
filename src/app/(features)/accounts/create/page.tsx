@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from "react";
 import { CreateAccountForm as components } from "@/constants/Account";
 import { Button } from "primereact/button";
