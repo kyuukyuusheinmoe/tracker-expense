@@ -7,6 +7,7 @@ export type BaseFormProps = {
     label: string;
     name: string;
     placeholder?: string;
+    defaultValue?: string
 }
 
 export type InputComponentProps = BaseFormProps & {

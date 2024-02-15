@@ -3,15 +3,14 @@ import { Button } from "primereact/button";
 import { IconColorMapper } from "../../../../exp-tracker/src/utils/common";
 import clsx from "clsx";
 
-function AccountCard({
-  accountType,
-  name,
-  balance,
-}: {
+export type AccountCardProps = {
+  id: number;
   accountType: string;
   name: string;
   balance: number;
-}) {
+};
+
+function AccountCard({ accountType, name, balance }: AccountCardProps) {
   return (
     <div>
       <div className="p-6 bg-blue-50 rounded-lg">
