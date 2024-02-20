@@ -2,7 +2,8 @@
 
 import { FormEvent } from "primereact/ts-helpers";
 import { SyntheticEvent } from "react";
-import { RegisterOptions, FieldValues } from "react-hook-form";
+import { RegisterOptions, FieldValues,  ResolverOptions, ResolverResult } from "react-hook-form";
+import * as Ajv from "ajv";
 
 export type BaseFormProps = {
     label: string;
@@ -59,4 +60,16 @@ export type DynamicFormElementProps = {
     displayValue?: string;
     condition?: any;
     validations?: FormValidationProps[]
-  };
+};
+
+
+export type Resolver = <T>(
+  schema: Ajv.JSONSchemaType<T>,
+  schemaOptions?: Ajv.Options,
+  factoryOptions?: { mode?: "async" | "sync" },
+  validateAllFieldCriteria?: boolean
+) => <TFieldValues extends FieldValues, TContext>(
+  values: TFieldValues,
+  context: TContext | undefined,
+  options: ResolverOptions<TFieldValues>
+) => Promise<ResolverResult<TFieldValues>>;

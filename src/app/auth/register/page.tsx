@@ -6,9 +6,10 @@ import { Button } from "primereact/button";
 import { RegisterForm as components } from "@/constants/Auth";
 import { register } from "@/services/authServices";
 import { FormFieldType } from "@/types/form";
-import { ajvResolver } from "@hookform/resolvers/ajv";
+import { ajvResolver } from "@/utils/ajvResolver";
 import { JSONSchemaType } from "ajv";
 import { AuthData } from "@/types/auth";
+import { fullFormats } from "ajv-formats/dist/formats";
 
 const registerFormSchema: JSONSchemaType<AuthData> = {
   type: "object",
@@ -16,12 +17,20 @@ const registerFormSchema: JSONSchemaType<AuthData> = {
     email: {
       type: "string",
       format: "email",
+      errorMessage: { format: "Must be a valid email address." },
     },
     password: {
       type: "string",
+      minLength: 1,
+      errorMessage: { minLength: "This field is required" },
     },
     confirmPassword: {
       type: "string",
+      minLength: 1,
+      const: {
+        $data: "1/password",
+      },
+      errorMessage: { minLength: "This field is required" },
     },
   },
   required: ["email", "password", "confirmPassword"],
@@ -29,7 +38,7 @@ const registerFormSchema: JSONSchemaType<AuthData> = {
 
 const Page = () => {
   const methods = useForm<AuthData>({
-    resolver: ajvResolver(registerFormSchema),
+    resolver: ajvResolver(registerFormSchema, { formats: fullFormats }),
   });
 
   const { handleSubmit, control } = methods;
@@ -51,7 +60,7 @@ const Page = () => {
             control={control}
           />
         ))}
-        <Button type="submit" label="Login" />
+        <Button type="submit" label="Register" />
       </form>
     </FormProvider>
   );
