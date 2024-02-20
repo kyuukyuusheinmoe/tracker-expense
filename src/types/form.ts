@@ -2,6 +2,7 @@
 
 import { FormEvent } from "primereact/ts-helpers";
 import { SyntheticEvent } from "react";
+import { RegisterOptions, FieldValues } from "react-hook-form";
 
 export type BaseFormProps = {
     label: string;
@@ -45,6 +46,8 @@ export type RadioListProps = BaseFormProps & {
 
 export type FormFieldType = "DropDown" | "Number" | "Password" | "RadioSelect" | "Calendar" | 'Input'
 
+export type FormValidationProps = Omit<RegisterOptions<FieldValues, string>, "disabled" | "setValueAs" | "valueAsNumber" | "valueAsDate"> | undefined
+
 export type DynamicFormElementProps = {
     control: any;
     componentType: FormFieldType;
@@ -55,4 +58,5 @@ export type DynamicFormElementProps = {
     displayKey?: string;
     displayValue?: string;
     condition?: any;
+    validations?: FormValidationProps[]
   };

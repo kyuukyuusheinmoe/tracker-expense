@@ -25,6 +25,26 @@ export const login = async (data: any) => {
     }
 }
 
+export const register = async (data: any) => {
+    try {
+        const result = await axiosClient.post("/auth/register", {
+            ...data,
+          })
+
+        if (result.status === 200) {
+            cookies().set(USER, JSON.stringify(result.data.data))
+            redirect('/')
+        }
+        return {success: false, message: "Something went wrong"}
+
+    } catch (error: any) {
+        if (isRedirectError(error)) {
+            redirect('/')
+        }
+        return {success: false, message:error?.response?.data?.message ||  "Something went wrong"}
+    }
+}
+
 export async function logout()
 {
     const redirectUrl = '/auth/login';

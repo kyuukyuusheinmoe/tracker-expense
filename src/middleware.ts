@@ -14,11 +14,13 @@ export function middleware(req: NextRequest, event: NextFetchEvent) {
           return NextResponse.redirect(new URL('/', req.url))
         } 
         break;
-    }
+      }
+      case '/auth/register': { 
+        return;
+      }
       default:  if(!userData?.value) {
           return NextResponse.redirect(new URL('/auth/login', req.url))
       } 
-      break;
     }
 
  

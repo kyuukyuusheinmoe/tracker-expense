@@ -14,7 +14,10 @@ function DynamicFormElement({
   condition,
   ...rest
 }: DynamicFormElementProps) {
-  const { field } = useController({
+  const {
+    field,
+    formState: { errors },
+  } = useController({
     name,
     control,
   });
@@ -43,13 +46,20 @@ function DynamicFormElement({
   return (
     <>
       {Component && componentShow && (
-        <Component
-          label={label}
-          items={itemList || []}
-          {...field}
-          defaultValue={defaultValue}
-          {...rest}
-        />
+        <>
+          <Component
+            label={label}
+            items={itemList || []}
+            {...field}
+            defaultValue={defaultValue}
+            {...rest}
+          />
+          {errors[name] && (
+            <p className="text-sm text-red-500">
+              {errors[name]?.message as string}
+            </p>
+          )}
+        </>
       )}
     </>
   );
