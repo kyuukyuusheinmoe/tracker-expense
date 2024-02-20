@@ -18,6 +18,14 @@ export const LoginForm = [
 
 export const RegisterForm = [
     {
+        label: "Name",
+        placeholder: "Name",
+        name: 'name',
+        formProps: {
+            type: "Input"
+        }
+    },
+    {
         label: "Email",
         placeholder: "Email",
         name: 'email',

@@ -14,6 +14,11 @@ import { fullFormats } from "ajv-formats/dist/formats";
 const registerFormSchema: JSONSchemaType<AuthData> = {
   type: "object",
   properties: {
+    name: {
+      type: "string",
+      minLength: 1,
+      errorMessage: { minLength: "Name is required" },
+    },
     email: {
       type: "string",
       format: "email",
