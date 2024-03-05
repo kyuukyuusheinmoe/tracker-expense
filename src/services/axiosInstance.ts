@@ -46,4 +46,4 @@ axiosClient.interceptors.response.use (response => {
   return response
 })
 
-export const fetcher = (url: string) => axiosClient.get(url).then(res=> res.data).catch(e => {data: null})
+export const fetcher = (url: string) => axiosClient.get(url).then(res=> res.data).catch(e => ({data: null}))

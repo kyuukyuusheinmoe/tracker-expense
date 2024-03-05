@@ -9,6 +9,7 @@ import DynamicFormElement from "@/components/Form/DynamicFormElement";
 import { createAccount } from "@/services/accountServices";
 import { Response } from "@/types/response";
 import { FormFieldType } from "@/types/form";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const methods = useForm({
@@ -17,11 +18,15 @@ const Page = () => {
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [apiData, setApiData] = useState<Response<any> | null>(null);
   const { control, handleSubmit, reset } = methods;
+  const router = useRouter();
 
   const onSubmit: () => void = handleSubmit(async (data: any) => {
     const requestData = { ...data };
     const res: Response<any> = await createAccount(requestData);
-    setApiData(res);
+    console.log("xxx account create res ", res);
+    if (res.success) {
+      router.push("/accounts");
+    }
   });
 
   return (

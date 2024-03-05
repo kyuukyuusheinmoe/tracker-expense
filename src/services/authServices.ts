@@ -15,9 +15,8 @@ export const login = async (data: any) => {
             cookies().set(USER, JSON.stringify(result.data.data))
             redirect('/')
         }
-        return {success: false, message: "Something went wrong"}
-
     } catch (error: any) {
+        console.log('xxx login err ', error)
         if (isRedirectError(error)) {
             redirect('/')
         }

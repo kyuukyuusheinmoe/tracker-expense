@@ -22,7 +22,6 @@ const Login = () => {
       <FormProvider {...methods}>
         <form
           action={(e) => {
-            console.log("xxx form event ", e);
             action();
           }}>
           <div className="grid gap-4">

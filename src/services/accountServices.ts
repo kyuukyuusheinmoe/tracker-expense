@@ -2,7 +2,6 @@
 
 import { axiosClient } from "./axiosInstance"
 import { revalidatePath } from "next/cache"
-import { Response } from "@/types/response";
 
 export const fetchAccountList = async (url: string) => {
     try {

@@ -54,16 +54,13 @@ export const createTransction = async (data: any) => {
             ...data
         })
 
-        if (result.status === 201) {
-            revalidatePath('/')
-            return ({success: false, message: "Transaction has been created."})
-        }
-        return ({success: false, message: "Failed to create transaction"})
+        console.log ('xxx trxn result ', result)
 
-    } catch (error) {
-        if (isRedirectError(error)) {
-            redirect('/')
+        if (result.status === 200) {
+            revalidatePath('/')
+            return ({success: true, message: "Transaction has been created."})
         }
+    } catch (error) {
         return ({success: false, message: "Failed to create transaction"})
     }
   }
