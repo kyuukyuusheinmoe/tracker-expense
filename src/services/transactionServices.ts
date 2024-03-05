@@ -1,9 +1,7 @@
 'use server'
 import { fetcher, axiosClient } from "./axiosInstance"
 import moment from "moment"
-import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
-import { isRedirectError } from "next/dist/client/components/redirect"
 
 export const fetchTopCategories = async () => {
     try {
@@ -28,6 +26,8 @@ export const fetchTotalBalance = async () => {
 
 export const fetchTotalExpense = async () => {
     const currentDate = new Date()
+    const startOfMonth = moment(currentDate).startOf('month').format('YYYY-MM-DD');
+    const endOfMonth   = moment(currentDate).endOf('month').format('YYYY-MM-DD');
     try {
         const result = await fetcher(`/analytic/total-expense?from=${moment([currentDate.getFullYear(), currentDate.getMonth()]).format('DD-MM-YYYY')}`)
         
@@ -54,13 +54,11 @@ export const createTransction = async (data: any) => {
             ...data
         })
 
-        console.log ('xxx trxn result ', result)
-
         if (result.status === 200) {
             revalidatePath('/')
             return ({success: true, message: "Transaction has been created."})
         }
-    } catch (error) {
-        return ({success: false, message: "Failed to create transaction"})
+    } catch (error: any) {
+        return ({success: false, message: error?.response?.data?.data.message || "Failed to create transaction"})
     }
   }

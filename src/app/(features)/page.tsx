@@ -6,8 +6,8 @@ import {
 import { months, currency } from "@/constants/common";
 import { Button } from "primereact/button";
 import { Suspense } from "react";
-import {TransactionList, TopCategoriesChart} from "./ui/dashboard";
-import { Skeleton } from 'primereact/skeleton';
+import { TransactionList, TopCategoriesChart } from "./ui/dashboard";
+import { Skeleton } from "primereact/skeleton";
 
 export default async function Home() {
   const categoriesData = await fetchTopCategories();
@@ -27,16 +27,14 @@ export default async function Home() {
         />
       </div>
       <p className="font-bold text-md">
-        {" "}
-        Balance:{" "}
+        Balance:
         <span className="font-normal">
           {totalBalance &&
-            `${Intl.NumberFormat().format(totalBalance)} ${currency}`}{" "}
+            `${Intl.NumberFormat().format(totalBalance)} ${currency}`}
         </span>
       </p>
       <p className="font-medium text-xl text-error">
-        {" "}
-        Total Expense:{" "}
+        Total Expense:
         {totalExpense &&
           `${Intl.NumberFormat().format(totalExpense)} ${currency}`}
       </p>

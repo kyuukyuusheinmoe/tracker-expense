@@ -23,7 +23,6 @@ const Page = () => {
   const onSubmit: () => void = handleSubmit(async (data: any) => {
     const requestData = { ...data };
     const res: Response<any> = await createAccount(requestData);
-    console.log("xxx account create res ", res);
     if (res.success) {
       router.push("/accounts");
     }
