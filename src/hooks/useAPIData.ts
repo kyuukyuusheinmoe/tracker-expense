@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { fetcher } from "@/services/axiosInstance";
 
 const useAPIData = (dataSource: any, watchValue: any) => {
-    console.log ('xxx dataSource ', dataSource)
     const [data, setData] = useState()
 
     const fetchData = async () => {

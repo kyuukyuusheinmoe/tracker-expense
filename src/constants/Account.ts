@@ -27,7 +27,8 @@ export const CreateAccountForm = [
         valueKey: "Object",
         dataSource: {
             type: "LIST",
-            items: [{label: "AYA PAY", value: "ayapay", accountType: PAY}, 
+            items: [{label: "Cash", value: "cash", accountType: CASH}, 
+                    {label: "AYA PAY", value: "ayapay", accountType: PAY}, 
                     {label: "KBZ PAY", value: "kpay", accountType: PAY}, 
                     {label: "KBZ Mobile Banking", value: "kbzBanking", accountType: BANK}, 
                     {label: "AYA Mobile Banking", value: "ayaBanking", accountType: BANK}

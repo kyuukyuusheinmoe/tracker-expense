@@ -29,7 +29,7 @@ export const fetchTotalBalance = async () => {
 export const fetchTotalExpense = async () => {
     const currentDate = new Date()
     try {
-        const result = await fetcher(`/analytic/total-expense?from=${moment([currentDate.getFullYear(), currentDate.getMonth()]).format('YYYY-MM-DD')}`)
+        const result = await fetcher(`/analytic/total-expense?from=${moment([currentDate.getFullYear(), currentDate.getMonth()]).format('DD-MM-YYYY')}`)
         
         return result.data?.total
     } catch (error: any) {

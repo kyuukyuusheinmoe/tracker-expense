@@ -15,7 +15,7 @@ export const fetchAccountList = async (url: string) => {
 export const createAccount= async (data: any) => {
     try {
         const result = await axiosClient.post ('/account/create', {...data})
-        if (result.status === 201) {
+        if (result.status === 200) {
             revalidatePath('/accounts')
             return {success: true, data: result.data.data}
         }
