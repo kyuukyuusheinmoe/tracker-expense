@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import DynamicFormElement from "@/components/Form/DynamicFormElement";
 import { Button } from "primereact/button";
@@ -10,11 +10,16 @@ import Link from "next/link";
 
 const Login = () => {
   const methods = useForm();
+  const [loading, setLoading] = useState(false);
 
   const { handleSubmit, control } = methods;
 
   const action: () => void = handleSubmit(async (data) => {
-    await login(data);
+    setLoading(true);
+    const res = await login(data);
+    if (res) {
+      setLoading(false);
+    }
   });
 
   return (
@@ -34,11 +39,15 @@ const Login = () => {
               />
             ))}
           </div>
-          <Button
-            type="submit"
-            label="Login"
-            className="w-full text-center my-4"
-          />
+          <div className="flex justify-center ">
+            <Button
+              type="submit"
+              label="Login"
+              className="text-center my-4 bg-slate-600 p-2 text-white"
+              iconPos="right"
+              icon={loading ? "pi pi-spin pi-spinner" : ""}
+            />
+          </div>
         </form>
       </FormProvider>
       <div> {`Don't have an account?`} </div>

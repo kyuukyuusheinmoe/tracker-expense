@@ -20,6 +20,25 @@ body {
  
 }
 
+*:focus {
+  outline: 0 none !important;
+  outline-color: initial !important;
+  outline-style: none !important;
+  outline-width: 0px !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+  border-color: unset !important
+}
+
+*:hover {
+  box-shadow: none !important;
+  border-color: unset !important
+}
+
+*:-internal-autofill-selected {
+  background-color: unset !important;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
