@@ -28,8 +28,10 @@ const Page = () => {
   const router = useRouter();
 
   const onSubmit: () => void = handleSubmit(async (data: any) => {
-    const requestData = { ...data };
-    const res = await createTransction(requestData);
+    const res = await createTransction({
+      ...data,
+      spentAt: new Date(data.spentAt),
+    });
     setApiData(res);
     setConfirmVisible(true);
   });
