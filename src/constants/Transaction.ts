@@ -50,7 +50,7 @@ export const CreateTransactionForm =  [
             displayValue: "id",
             dataSource: {
                 type: "API",
-                url: "http://localhost:4000/category/list",
+                url: "/category/list",
             }
         },
         {
@@ -64,7 +64,7 @@ export const CreateTransactionForm =  [
             displayValue: "id",
             dataSource: {
                 type: "API",
-                url: "http://localhost:4000/account/list",
+                url: "/account/list",
             }
         },
         {
