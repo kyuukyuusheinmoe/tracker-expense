@@ -5,7 +5,7 @@ const useAPIData = (dataSource: any, watchValue: any) => {
     const [data, setData] = useState()
 
     const fetchData = async () => {
-        if (dataSource.type === 'API') {
+        if (dataSource?.type === 'API') {
             const result = await fetcher(dataSource.url)
             setData(result.data)
         }
