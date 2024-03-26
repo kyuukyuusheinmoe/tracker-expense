@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { componentMapper } from "@/utils/componentMapper";
