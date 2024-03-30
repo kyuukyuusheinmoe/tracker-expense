@@ -21,9 +21,9 @@ const TransactionForm = () => {
     shouldUnregister: true,
   });
   const [confirmVisible, setConfirmVisible] = useState(false);
-  const [apiData, setApiData] = useState<{ success?: boolean } | undefined>(
-    undefined
-  );
+  const [apiData, setApiData] = useState<
+    { success?: boolean; message: string } | undefined
+  >(undefined);
   const { control, handleSubmit, reset } = methods;
   const router = useRouter();
 
@@ -32,6 +32,7 @@ const TransactionForm = () => {
       ...data,
       spentAt: new Date(data.spentAt),
     });
+    console.log("xxx submit data ", data);
     setApiData(res);
     setConfirmVisible(true);
   });
@@ -73,7 +74,7 @@ const TransactionForm = () => {
           />
         ) : (
           <div className="flex flex-col gap-4">
-            <p> Something went wrong.</p>
+            <p>{apiData?.message}</p>
             <Button
               icon="pi pi-refresh"
               label="Try Again"
