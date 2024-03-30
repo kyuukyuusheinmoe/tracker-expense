@@ -38,7 +38,7 @@ const registerFormSchema: JSONSchemaType<AuthData> = {
       errorMessage: { minLength: "This field is required" },
     },
   },
-  required: ["email", "password", "confirmPassword"],
+  required: ["name", "email", "password", "confirmPassword"],
 };
 
 const Page = () => {
