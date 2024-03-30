@@ -15,7 +15,7 @@ function InputNumberComponent({
       </label>
       <InputNumber
         name={name}
-        inputId="integeronly"
+        // inputId="integeronly"
         value={value}
         onValueChange={(e) => onChange(e.value)}
         className=" col-span-8 !border-b-[1px] !border-black"
