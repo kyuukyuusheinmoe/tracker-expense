@@ -49,8 +49,7 @@ export async function logout()
     const redirectUrl = '/auth/login';
     try
     {
-        cookies().delete("user");
-        cookies().delete("token");
+        cookies().delete("USER");
 
         return redirect(redirectUrl);
 

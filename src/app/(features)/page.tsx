@@ -10,6 +10,7 @@ import { TransactionList, TopCategoriesChart } from "./ui/dashboard";
 import { Skeleton } from "primereact/skeleton";
 
 export default async function Home() {
+  "use server";
   const categoriesData = await fetchTopCategories();
   const totalBalance = await fetchTotalBalance();
   const totalExpense = await fetchTotalExpense();

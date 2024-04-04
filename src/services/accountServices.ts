@@ -29,6 +29,15 @@ export const createAccount= async (data: any) => {
     }
 }
 
+export const fetchAccountDetails= async (id: number) => {
+    try {
+        const result = await axiosClient.get (`/account/${id}`)
+        return {success: true, data: result.data.data}
+    } catch (error: any) {
+        return {success: false}
+    }
+}
+
 export const deleteAccount= async (id: number) => {
     try {
         const result = await axiosClient.delete (`/account/${id}`)

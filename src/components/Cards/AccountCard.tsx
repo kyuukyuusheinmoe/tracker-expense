@@ -5,6 +5,7 @@ import { IconColorMapper } from "@/utils/common";
 import clsx from "clsx";
 import { Dialog } from "primereact/dialog";
 import { deleteAccount } from "@/services/accountServices";
+import Link from "next/link";
 
 export type AccountCardProps = {
   id: number;
@@ -28,7 +29,9 @@ function AccountCard({ id, accountType, name, balance }: AccountCardProps) {
           onClick={async () => {
             await deleteAccount(id);
           }}></i>
-        {/* <i className="pi pi-pencil" style={{ fontSize: "1rem" }}></i> */}
+        <Link href={`/accounts/update/${id}`}>
+          <i className="pi pi-pencil" style={{ fontSize: "1rem" }}/>
+        </Link>
       </div>
       <div className="flex justify-between">
         <p className="text-center font-medium text-lg"> {name} </p>

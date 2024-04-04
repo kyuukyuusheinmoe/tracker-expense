@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import { CreateAccountForm as components } from "@/constants/Account";
 import { Button } from "primereact/button";
@@ -11,9 +10,11 @@ import { Response } from "@/types/response";
 import { FormFieldType } from "@/types/form";
 import { useRouter } from "next/navigation";
 
-const Page = () => {
+const AccountForm = ({ details }: { details?: any }) => {
+  console.log("xxx details ", details);
   const methods = useForm({
     shouldUnregister: true,
+    defaultValues: details,
   });
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [apiData, setApiData] = useState<Response<any> | null>(null);
@@ -27,7 +28,6 @@ const Page = () => {
       router.push("/accounts");
     }
   });
-
   return (
     <>
       <FormProvider {...methods}>
@@ -73,4 +73,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default AccountForm;
