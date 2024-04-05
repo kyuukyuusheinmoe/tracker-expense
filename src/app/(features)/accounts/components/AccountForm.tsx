@@ -21,15 +21,13 @@ const AccountForm = ({ details }: { details?: any }) => {
   const { control, handleSubmit, reset } = methods;
   const router = useRouter();
   const { actions } = useParams();
-  const [action, id] = actions;
-
-  console.log("xxx action, id ",actions, action, id);
+  const [action, id]: string[] = actions as string[];
 
   const onSubmit: () => void = handleSubmit(async (data: any) => {
     const requestData = { ...data };
     const res: Response<any> =
       action === "update"
-        ? await updateAccount(id,{  ...requestData })
+        ? await updateAccount(+id, { ...requestData })
         : await createAccount(requestData);
     if (res.success) {
       router.push("/accounts");
