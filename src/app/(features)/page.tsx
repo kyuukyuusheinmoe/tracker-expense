@@ -3,28 +3,39 @@ import {
   fetchTotalBalance,
   fetchTotalExpense,
 } from "@/services/transactionServices";
-import { months, currency } from "@/constants/common";
-import { Button } from "primereact/button";
+import { currency } from "@/constants/common";
 import { Suspense } from "react";
 import { TransactionList, TopCategoriesChart } from "./ui/dashboard";
 import { Skeleton } from "primereact/skeleton";
+import SelectDateComponent from "./components/SelectDateComponent";
+import moment from "moment";
 
-export default async function Home() {
-  "use server";
-  const categoriesData = await fetchTopCategories();
+export default async function Home({
+  params,
+}: {
+  params: { searchParams: { from: string; to: string } };
+}) {
+  const { searchParams } = params;
+  const currentDate = new Date();
+  const fromDate =
+    searchParams?.from ||
+    moment(currentDate).startOf("month").format("YYYY-MM-DD");
+  const toDate =
+    searchParams?.to || moment(currentDate).endOf("month").format("YYYY-MM-DD");
+
+  const categoriesData = await fetchTopCategories(
+    fromDate as string,
+    toDate as string
+  );
   const totalBalance = await fetchTotalBalance();
   const totalExpense = await fetchTotalExpense();
-
-  const currentDate = new Date();
-  const currentMonth = months[currentDate.getMonth()];
 
   return (
     <div className="p-4">
       <div className="flex flex-row-reverse">
-        <Button
-          label={currentMonth}
-          icon="pi pi-calendar pr-1"
-          className="!bg-main !text-white !p-2 !rounded-full"
+        <SelectDateComponent
+          fromDate={fromDate as string}
+          toDate={toDate as string}
         />
       </div>
       <p className="font-bold text-md">

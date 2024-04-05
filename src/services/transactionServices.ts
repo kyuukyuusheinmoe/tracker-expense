@@ -2,16 +2,22 @@
 import { fetcher, axiosClient } from "./axiosInstance"
 import moment from "moment"
 import { revalidatePath } from "next/cache"
+import { logout } from "./authServices"
 
-export const fetchTopCategories = async () => {
+export const fetchTopCategories = async (from: string, to:string) => {
+    console.log ('xxx fetchTopCategories ', `/analytic/top-categories?limit=5&from=${from}&to=${to}`)
     try {
-        const result = await fetcher('/analytic/top-categories?limit=5')
+        const result = await axiosClient.get(`/analytic/top-categories?limit=5&from=${from}&to=${to}`)
+        console.log ('xxx result ', result)
 
-        return result?.data
-
+        return result?.data.data
     } catch (error: any) {
-        console.log ('xxx error ', error)
-        return null
+        console.log ('xxx error code ', error.response.status === 401)
+        if (error.response.status === 401) {
+            logout()
+            return;
+        }
+        return null;
     }
 }
 
