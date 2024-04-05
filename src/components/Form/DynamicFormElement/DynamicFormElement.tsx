@@ -17,7 +17,7 @@ function DynamicFormElement({
 }: DynamicFormElementProps) {
   const {
     field,
-    formState: { errors },
+    formState: { defaultValues, errors },
   } = useController({
     name,
     control,
@@ -52,7 +52,7 @@ function DynamicFormElement({
             label={label}
             items={itemList || []}
             {...field}
-            defaultValue={defaultValue}
+            defaultValue={defaultValues?.[field.name]}
             {...rest}
           />
           {errors[name] && (

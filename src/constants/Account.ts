@@ -4,6 +4,14 @@ export const PAY = "PAY";
 
 export const CreateAccountForm = [
     {
+        label: "Name",
+        name: 'alias',
+        formProps : {
+            type: "Input",
+            valueType: "string"
+        },
+    },
+    {
         label: "Account Type",
         name: 'accountType',
         formProps : {
@@ -17,7 +25,7 @@ export const CreateAccountForm = [
         }
     },
     {
-        label: "Wallet Name",
+        label: "Provider",
         name: 'name',
         formProps : {
             type: "DropDown",

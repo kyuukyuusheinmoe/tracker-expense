@@ -38,6 +38,19 @@ export const fetchAccountDetails= async (id: number) => {
     }
 }
 
+export const updateAccount= async (id: number, data: any) => {
+    try {
+        const result = await axiosClient.patch(`/account/${id}`, {...data})
+        if (result.status === 200) {
+            revalidatePath('/accounts')
+            return {success: true, data: result.data.data}
+        }
+        return {success: false}
+    } catch (error: any) {
+        return {success: false}
+    }
+}
+
 export const deleteAccount= async (id: number) => {
     try {
         const result = await axiosClient.delete (`/account/${id}`)

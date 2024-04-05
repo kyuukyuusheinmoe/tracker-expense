@@ -12,9 +12,16 @@ export type AccountCardProps = {
   accountType: string;
   name: string;
   balance: number;
+  alias: string;
 };
 
-function AccountCard({ id, accountType, name, balance }: AccountCardProps) {
+function AccountCard({
+  id,
+  accountType,
+  name,
+  balance,
+  alias,
+}: AccountCardProps) {
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [apiData, setApiData] = useState<
     { success?: boolean; message: string } | undefined
@@ -30,18 +37,18 @@ function AccountCard({ id, accountType, name, balance }: AccountCardProps) {
             await deleteAccount(id);
           }}></i>
         <Link href={`/accounts/update/${id}`}>
-          <i className="pi pi-pencil" style={{ fontSize: "1rem" }}/>
+          <i className="pi pi-pencil" style={{ fontSize: "1rem" }} />
         </Link>
       </div>
       <div className="flex justify-between">
-        <p className="text-center font-medium text-lg"> {name} </p>
+        <p className="text-center font-medium text-lg"> {alias} </p>
         <Button
           icon={IconColorMapper(accountType)?.icon}
           className={clsx(
             IconColorMapper(accountType)?.color,
             " !flex !items-center !rounded-full !px-2 !py-1 !text-sm overflow-hidden"
           )}>
-          <span className="ml-1">{accountType}</span>
+          <span className="ml-1">{name}</span>
         </Button>
       </div>
       <p className="text-end font-bold text-xl mt-2">

@@ -1,17 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { CreateAccountForm as components } from "@/constants/Account";
+import { useParams } from "next/navigation";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { useForm, FormProvider } from "react-hook-form";
 import DynamicFormElement from "@/components/Form/DynamicFormElement";
-import { createAccount } from "@/services/accountServices";
+import { createAccount, updateAccount } from "@/services/accountServices";
 import { Response } from "@/types/response";
 import { FormFieldType } from "@/types/form";
 import { useRouter } from "next/navigation";
 
 const AccountForm = ({ details }: { details?: any }) => {
-  console.log("xxx details ", details);
   const methods = useForm({
     shouldUnregister: true,
     defaultValues: details,
@@ -20,10 +20,17 @@ const AccountForm = ({ details }: { details?: any }) => {
   const [apiData, setApiData] = useState<Response<any> | null>(null);
   const { control, handleSubmit, reset } = methods;
   const router = useRouter();
+  const { actions } = useParams();
+  const [action, id] = actions;
+
+  console.log("xxx action, id ",actions, action, id);
 
   const onSubmit: () => void = handleSubmit(async (data: any) => {
     const requestData = { ...data };
-    const res: Response<any> = await createAccount(requestData);
+    const res: Response<any> =
+      action === "update"
+        ? await updateAccount(id,{  ...requestData })
+        : await createAccount(requestData);
     if (res.success) {
       router.push("/accounts");
     }
