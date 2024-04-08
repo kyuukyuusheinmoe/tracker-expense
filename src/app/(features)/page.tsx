@@ -12,10 +12,12 @@ import moment from "moment";
 
 export default async function Home({
   params,
+  searchParams,
 }: {
-  params: { searchParams: { from: string; to: string } };
+  params: any;
+  searchParams: { from: string; to: string };
 }) {
-  const { searchParams } = params;
+
   const currentDate = new Date();
   const fromDate =
     searchParams?.from ||
